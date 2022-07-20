@@ -1,0 +1,70 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[],
+    "equivalentSystem":"sistemafinale",
+    "subsystems":["sistema1","sistema2"],
+    "retro":false,
+    "subConfig":"sidebyside",
+    "name":"sistema3",
+    "systemPosition":""
+
+  },
+
+  "sistemsColletion":[
+    {
+    "name":"sistema1",
+    "states":["s1","s2"],
+    "initialstate":["s1"],
+    "input":["z"],
+    "output":["a"],
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"s1",
+        "input":["true"],
+        "output":[""],
+        "finalState":"s2"
+    }, {
+        "initialState":"s2",
+        "input":["-z"],
+        "output":["a"],
+        "finalState":"s1"
+    }
+    ]
+
+    },
+
+
+    {
+    "name":"sistema2",
+    "states":["s3","s4"],
+    "initialstate":["s3"],
+    "input":["x"],
+    "output":["b"],
+
+   "updateFunctions":
+      [
+    {
+        "initialState":"s3",
+        "input":["true"],
+        "output":["b"],
+        "finalState":"s4"
+    },
+    {
+        "initialState":"s4",
+        "input":["true"],
+        "output":[""],
+        "finalState":"s3"
+    }
+    ]
+
+
+    }
+  ]
+}
+
+
+

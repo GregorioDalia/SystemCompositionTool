@@ -1,0 +1,47 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[],
+    "subsystems":["sistema1"],
+    "retro":true,
+    "subConfig":"retro",
+    "name":"sistemafinale",
+    "systemPosition":""
+  },
+
+  "sistemsColletion":[
+    {
+    "name":"sistema1",
+    "states":["s1s3","s2s4"],
+    "initialstate":["s1s3"],
+    "input":["x"],
+    "output":["y"],
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"s1s3",
+        "input":["x"],
+        "output":["y"],
+        "finalState":"s1s3"
+    }, {
+        "initialState":"s1s3",
+        "input":["x"],
+        "output":["y"],
+        "finalState":"s2s4"
+    },{
+     "initialState":"s2s4",
+        "input":[""],
+        "output":[""],
+        "finalState":"s2s4"
+    }
+
+    ]
+
+    }
+  ]
+}
+
+
+

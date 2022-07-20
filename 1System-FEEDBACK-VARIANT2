@@ -1,0 +1,48 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[],
+    "systemPosition":"",
+    "subsystems":["sistema1"],
+    "retro":true,
+    "subConfig":"cascade",
+    "name":"maxisistema"
+
+  },
+
+  "sistemsColletion":[
+    {
+    "name":"sistema1",
+    "states":["s1","s2"],
+    "initialstate":["s1"],
+    "input":["x"],
+    "output":["y"],
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"s1",
+        "input":["x=0"],
+        "output":["y=1"],
+        "finalState":"s1"
+    }, {
+        "initialState":"s1",
+        "input":["-x"],
+        "output":[""],
+        "finalState":"s2"
+    },
+    {
+        "initialState":"s2",
+        "input":["-x"],
+        "output":[""],
+        "finalState":"s1"
+    }
+    ]
+
+    }
+  ]
+}
+
+
+

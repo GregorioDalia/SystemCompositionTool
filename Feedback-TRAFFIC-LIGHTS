@@ -1,0 +1,147 @@
+{
+
+  "configurations" : {
+
+    "systemPosition":"",
+    "subsystems":[],
+    "retro":true,
+    "subConfig":"",
+    "name":"SemaforoRETROAZIONE",
+
+    "subnodes":[
+    {
+    "systemPosition":"right",
+    "subsystems":["PedestianSystem"],
+    "retro":"",
+    "subConfig":"cascade",
+    "name":"SemaforoTOTALE",
+
+    "subnodes":[
+
+      {
+   "systemPosition":"",
+    "subsystems":["TrafficLights"],
+    "retro":"",
+    "subConfig":"cascade",
+    "name":"SemaforoComposto",
+      "subnodes":[]
+
+      }
+    ]
+
+
+
+
+    }
+    ]
+
+
+
+
+  }
+  ,
+
+  "sistemsColletion":[
+    {
+    "name":"TrafficLights",
+    "extended":"true",
+    "states":["red","green","waiting","yellow"],
+    "initialstate":["red"],
+    "input":["pedestian"],
+    "output":["sigR","sigG","sigY"],
+    "variable":["count"],
+
+    "maxTIME":{
+     "redMAX":"2",
+     "greenMAX":"2_",
+     "yellowMAX":"1",
+     "waitingMAX":"2"
+    },
+
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"red",
+        "variablecheck":"count>=60",
+        "input":[""],
+        "variableaction":"count=0",
+        "output":["","sigG",""],
+        "finalState":"green"
+    },{
+        "initialState":"green",
+        "input":["pedestian"],
+        "variablecheck":"count<60",
+        "variableaction":"count++",
+        "output":["","",""],
+        "finalState":"waiting"
+    }
+    , {
+        "initialState":"waiting",
+        "input":[""],
+        "variablecheck":"count>=60",
+        "variableaction":"count=0",
+        "output":["","","sigY"],
+        "finalState":"yellow"
+    }, {
+        "initialState":"green",
+        "input":["pedestian"],
+        "variablecheck":"count>=60",
+        "variableaction":"count=0",
+        "output":["","","sigY"],
+        "finalState":"yellow"
+    }, {
+        "initialState":"yellow",
+        "input":[""],
+        "variablecheck":"count>=5",
+        "variableaction":"count=0",
+        "output":["sigR","",""],
+        "finalState":"red"
+    }
+    ]
+    }
+,
+
+
+    {
+    "name":"PedestianSystem",
+    "states":["none","waiting","crossing"],
+    "initialstate":["crossing"],
+    "input":["sigR","sigG","sigY"],
+    "output":["pedestian"],
+
+   "updateFunctions":
+      [
+    {
+        "initialState":"none",
+        "input":["true","true","true"],
+        "output":[""],
+        "finalState":"none"
+    },
+    {
+        "initialState":"none",
+        "input":["true","true","true"],
+        "output":["pedestian"],
+        "finalState":"waiting"
+    },
+    {
+        "initialState":"waiting",
+        "input":["sigR","",""],
+        "output":[""],
+        "finalState":"crossing"
+    }, {
+        "initialState":"crossing",
+        "input":["","sigG",""],
+        "output":[""],
+        "finalState":"none"
+    }
+      ]
+    }
+    ]
+
+
+
+}
+
+
+

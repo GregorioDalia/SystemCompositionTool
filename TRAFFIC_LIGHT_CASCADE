@@ -1,0 +1,153 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[
+
+    {
+     "subnodes" : [],
+     "subsystems":["TrafficLights"],
+     "retro" : false,
+     "subConfig" : "cascade",
+     "name" :"PrimoSottoSistema",
+     "systemPosition":""
+
+    },{
+     "subnodes" : [],
+     "subsystems":["PedLights"],
+     "retro" : false,
+     "subConfig" : "cascade",
+     "name" :"secondoSottosistema",
+     "systemPosition":""
+
+    }
+
+    ],
+    "systemPosition":"",
+    "subsystems":[],
+    "retro":"",
+    "subConfig":"cascade",
+    "name":"SemaforoCompleto"
+
+  },
+
+  "sistemsColletion":[
+     {
+    "name":"TrafficLights",
+    "extended":"true",
+    "states":["red","green","waiting","yellow"],
+    "initialstate":["red"],
+    "input":["pedestian"],
+    "output":["sigR","sigG","sigY"],
+    "variable":["count"],
+
+    "maxTIME":{
+     "redMAX":"2",
+     "greenMAX":"2_",
+     "yellowMAX":"2",
+     "waitingMAX":"2"
+    },
+
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"red",
+        "variablecheck":"count>=60",
+        "input":[""],
+        "variableaction":"count=0",
+        "output":["","sigG",""],
+        "finalState":"green"
+    },{
+        "initialState":"green",
+        "input":["pedestian"],
+        "variablecheck":"count<60",
+        "variableaction":"count++",
+        "output":["","",""],
+        "finalState":"waiting"
+    }
+    , {
+        "initialState":"waiting",
+        "input":[""],
+        "variablecheck":"count>=60",
+        "variableaction":"count=0",
+        "output":["","","sigY"],
+        "finalState":"yellow"
+    }, {
+        "initialState":"green",
+        "input":["pedestian"],
+        "variablecheck":"count>=60",
+        "variableaction":"count=0",
+        "output":["","","sigY"],
+        "finalState":"yellow"
+    }, {
+        "initialState":"yellow",
+        "input":[""],
+        "variablecheck":"count>=5",
+        "variableaction":"count=0",
+        "output":["sigR","",""],
+        "finalState":"red"
+    }
+    ]
+
+    },
+
+
+    {
+    "name":"PedLights",
+    "extended":"true",
+    "states":["PEDred","PEDgreen"],
+    "initialstate":["PEDgreen"],
+    "input":["sigR","sigG","sigY"],
+    "output":["pedG"],
+    "variable":["count"],
+
+    "maxTIME":{
+     "PEDredMAX":"-1",
+     "PEDgreenMAX":"2"
+    },
+
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"PEDgreen",
+        "variablecheck":"count>=5",
+        "input":["","sigG",""],
+        "variableaction":"count=0",
+        "output":["pedR"],
+        "finalState":"PEDred"
+    },{
+        "initialState":"PEDred",
+        "input":["sigR","",""],
+        "variablecheck":"",
+        "variableaction":"",
+        "output":["pedG"],
+        "finalState":"PEDgreen"
+    },{
+        "initialState":"PEDred",
+        "input":["true","","true"],
+        "variablecheck":"",
+        "variableaction":"",
+        "output":["pedG"],
+        "finalState":"PEDred"
+    },{
+        "initialState":"PEDgreen",
+        "input":["","true","true"],
+        "variablecheck":"",
+        "variableaction":"",
+        "output":["pedG"],
+        "finalState":"PEDgreen"
+    }
+
+    ]
+
+    }
+    ]
+
+
+
+}
+
+
+

@@ -1,0 +1,140 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[
+
+    {
+     "subnodes" : [],
+     "subsystems":["TrafficLights"],
+     "retro" : false,
+     "subConfig" : "",
+     "name" :"PrimoSottoSistema",
+     "systemPosition":""
+
+    }
+    ,{
+     "subnodes" : [],
+     "subsystems":["PedLights"],
+     "retro" : false,
+     "subConfig" : "",
+     "name" :"secondoSottosistema",
+     "systemPosition":""
+
+    }
+
+    ],
+    "systemPosition":"",
+    "subsystems":[],
+    "retro":"",
+    "subConfig":"cascade",
+    "name":"SemaforoCompleto"
+
+  },
+
+  "sistemsColletion":[
+     {
+    "name":"TrafficLights",
+    "extended":"true",
+    "states":["red","green","waiting","yellow"],
+    "initialstate":["red"],
+    "input":["pedestian"],
+    "output":["sigR"],
+    "variable":["count"],
+
+    "maxTIME":{
+     "redMAX":"2",
+     "greenMAX":"2_",
+     "yellowMAX":"1",
+     "waitingMAX":"2"
+    },
+
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"red",
+        "variablecheck":"count>=60",
+        "input":[""],
+        "variableaction":"count=0",
+        "output":[""],
+        "finalState":"green"
+    },{
+        "initialState":"green",
+        "input":["pedestian"],
+        "variablecheck":"count<60",
+        "variableaction":"count++",
+        "output":[""],
+        "finalState":"waiting"
+    }
+    , {
+        "initialState":"waiting",
+        "input":[""],
+        "variablecheck":"count>=60",
+        "variableaction":"count=0",
+        "output":[""],
+        "finalState":"yellow"
+    }, {
+        "initialState":"green",
+        "input":["pedestian"],
+        "variablecheck":"count>=60",
+        "variableaction":"count=0",
+        "output":[""],
+        "finalState":"yellow"
+    }, {
+        "initialState":"yellow",
+        "input":[""],
+        "variablecheck":"count>=5",
+        "variableaction":"count=0",
+        "output":["sigR"],
+        "finalState":"red"
+    }
+    ]
+
+    },
+
+
+    {
+    "name":"PedLights",
+    "extended":"true",
+    "states":["PEDred","PEDgreen"],
+    "initialstate":["PEDgreen"],
+    "input":["sigR"],
+    "output":["pedG"],
+    "variable":["count"],
+
+    "maxTIME":{
+     "PEDredMAX":"-1",
+     "PEDgreenMAX":"1"
+    },
+
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"PEDgreen",
+        "variablecheck":"count>=5",
+        "input":[""],
+        "variableaction":"count=0",
+        "output":["pedR"],
+        "finalState":"PEDred"
+    },{
+        "initialState":"PEDred",
+        "input":["sigR"],
+        "variablecheck":"",
+        "variableaction":"",
+        "output":["pedG"],
+        "finalState":"PEDgreen"
+    }
+
+    ]
+
+    }
+    ]
+
+
+
+}
+
+
+

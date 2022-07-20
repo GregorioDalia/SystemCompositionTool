@@ -1,0 +1,51 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[],
+    "systemPosition":"",
+    "subsystems":["PedLights"],
+    "retro":"",
+    "subConfig":"",
+    "name":"PedLightSystem"
+  },
+
+  "sistemsColletion":[
+   {
+    "name":"PedLights",
+    "extended":"true",
+    "states":["PEDred","PEDgreen"],
+    "initialstate":["PEDgreen"],
+    "input":["sigR","sigG","sigY"],
+    "output":["pedG"],
+    "variable":["count"],
+
+    "maxTIME":{
+     "PEDredMAX":"-1",
+     "PEDgreenMAX":"1"
+    },
+
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"PEDgreen",
+        "variablecheck":"count>=5",
+        "input":["","",""],
+        "variableaction":"count=0",
+        "output":["pedR"],
+        "finalState":"PEDred"
+    },{
+        "initialState":"PEDred",
+        "input":["sigR","",""],
+        "variablecheck":"",
+        "variableaction":"",
+        "output":["pedG"],
+        "finalState":"PEDgreen"
+    }
+
+    ]
+
+
+    }]
+    }

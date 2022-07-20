@@ -1,0 +1,63 @@
+{
+
+  "configurations" : {
+
+    "subnodes":[],
+    "equivalentSystem":"sistemafinale",
+    "subsystems":["sistema1"],
+    "retro":true,
+    "subConfig":"retro",
+    "name":"sistema2",
+    "systemPosition":""
+  },
+
+  "sistemsColletion":[
+    {
+    "name":"sistema1",
+    "states":["s1","s2","s3"],
+    "initialstate":["s1"],
+    "input":["x"],
+    "output":["y"],
+
+    "updateFunctions":
+      [
+    {
+        "initialState":"s1",
+        "input":["x=2"],
+        "output":["y=2"],
+        "finalState":"s2"
+    }, {
+        "initialState":"s1",
+        "input":["true"],
+        "output":["y=2"],
+        "finalState":"s1"
+    },
+    {
+        "initialState":"s2",
+        "input":["x=3"],
+        "output":["y=3"],
+        "finalState":"s3"
+    },{
+        "initialState":"s2",
+        "input":["true"],
+        "output":["y=3"],
+        "finalState":"s2"
+    },{
+        "initialState":"s3",
+        "input":["x=1"],
+        "output":["y=1"],
+        "finalState":"s1"
+    },{
+        "initialState":"s3",
+        "input":["true"],
+        "output":["y=1"],
+        "finalState":"s3"
+    }
+    ]
+
+    }
+  ]
+}
+
+
+
